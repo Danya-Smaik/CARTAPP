@@ -1,4 +1,9 @@
-localStorage.setItem("first car" , "BMW")
-console.log(localStorage.getItem("first car"))
+let userInfo = document.querySelector ("#user_info")
+let userD = document.querySelector ("#user")
+let links = document.querySelector ("#link")
 
-localStorage.setItem("name","danya")
+if (localStorage.getItem("username")){
+    links.remove()
+    userInfo.style.display ="block"
+    userD.textContent = localStorage.getItem("username")
+}
