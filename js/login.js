@@ -11,7 +11,7 @@ loginBtn.addEventListener ("click" , function(e){
     if (username.value==="" || password.value===""){
         alert("please fill data ")
     } else {
-        if ( (getUser && getUser.trim() === username.value && getPassword && getPassword === password.value )  )
+        if ( (getUser && getUser.trim() === username.value.trim() && getPassword && getPassword === password.value )  )
         {
             setTimeout ( () => {
                 window.location = "index.html"
