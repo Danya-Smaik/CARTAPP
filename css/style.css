@@ -7,17 +7,21 @@
 .container{
     width: 80%;
     margin:auto;
+    height: 100%;
 
 }
 header{
     height: 70px;
     background-color: gray;
     padding:0px 30px;
+    display: flex;     
+    align-items: center;  
 }
 .header-content{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
 
 }
 .header-content .brand{
@@ -84,6 +88,7 @@ nav ul#user_info{
     /* background-color: green ; */
     border: 1px solid #ddd;
     min-height: 150px;
+    margin: 20px ;
 }
 .product_item img{
     width: 25%;
@@ -107,4 +112,21 @@ nav ul#user_info{
     font-size: 14px;
     cursor: pointer ;
     font-family : 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+.product_item .fa-solid{
+cursor: pointer;
+display: block;
+width:20px;
+margin-left: auto;
+
+
+}
+/*----------------------------------------------- */
+nav ul#user_info li i {
+    color : #fff;
+    font-size: 25px;
+    cursor: pointer;
+}
+nav ul#user_info li{
+    margin : 0px 10px ;
 }
