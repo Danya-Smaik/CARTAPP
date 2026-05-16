@@ -4,6 +4,6 @@ let links = document.querySelector ("#link")
 
 if (localStorage.getItem("username")){
     links.remove()
-    userInfo.style.display ="block"
+    userInfo.style.display ="flex"
     userD.textContent = localStorage.getItem("username")
 }
