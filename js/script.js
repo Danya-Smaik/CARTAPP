@@ -7,3 +7,5 @@ if (localStorage.getItem("username")){
     userInfo.style.display ="flex"
     userD.textContent = localStorage.getItem("username")
 }
+////////////////////////////////////////
+let allProducts = document.querySelecoter(".producets ")
