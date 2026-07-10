@@ -148,3 +148,25 @@ nav ul#user_info li .badge{
     right:-18px;
     font-size: 13px;
 }
+/* -------------------- */
+.carts_products {
+  position:absolute;
+  width: 210px;
+  transform: translate(-40,0);
+  background-color:#eaeaea;
+  top:56px;
+  padding:10px;
+  border:1px solid green;
+
+
+}
+.carts_products  a  {
+display: block;
+color: black;
+margin: 4px 0;
+padding: 0;
+background-color: darkgreen;
+color: #fff;
+text-align:center ;
+text-decoration: none;
+}

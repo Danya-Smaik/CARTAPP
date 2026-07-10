@@ -14,43 +14,50 @@ let products = [
         id:1,
         title:"airpods",
         color:"pink",
-        imageUrl:"images/airpods.jpg"
+        imageUrl:"images/airpods.jpg",
+        des :"Generic M10 TWS True Wireless Bluetooth Earbuds Earphone with LED Digital"
     },
     {
         id:2,
         title:"Smart Watch",
         color:"balck",
-        imageUrl:"images/smartwatch.jpg"
+        imageUrl:"images/smartwatch.jpg",
+        des:"Modern smartwatch with fitness tracking, heart rate monitor, and stylish design suitable for everyday activities."
     },
     {
         id:3,
         title:"Head Phone",
         color:"white",
-        imageUrl:"images/headphonewhite.jpg"
+        imageUrl:"images/headphonewhite.jpg",
+        des:"Comfortable over-ear headphones delivering deep bass and immersive sound experience for music lovers"
     },
     {
         id:4,
         title:"Head Phone",
         color:"balck",
-        imageUrl:"images/headphone.jpg"
+        imageUrl:"images/headphone.jpg",
+        des:"Premium wireless headset with crystal clear sound, soft ear cushions, and noise isolation for an immersive listening experience"
     },
     {
         id:5,
         title:"printer",
         color:"balck",
-        imageUrl:"images/printer.jpg"
+        imageUrl:"images/printer.jpg" , 
+        des:"Wireless all-in-one printer with print, scan, copy, and fax functions. Includes automatic duplex printing and is perfect for home office use.."
     },
     {
         id:6,
         title:"Smart Fitness Watch",
         color:"balck",
-        imageUrl:"images/smartwatch2.jpg"
+        imageUrl:"images/smartwatch2.jpg",
+        des:"Smart fitness watch with Bluetooth calls, health tracking, 110 sports modes, and IP68 water resistance. Compatible with Android and iPhone"
     },
     {
         id:7,
         title:"Airpods Sports Ear Hooks",
         color:"white",
-        imageUrl:"images/airpods2.jpg"
+        imageUrl:"images/airpods2.jpg",
+        des:"Comfortable anti-slip silicone ear hooks for AirPods, offering a secure fit during sports and everyday use"
     },
 ]
 function drawItem(){
@@ -60,7 +67,7 @@ function drawItem(){
                     <img src="${item.imageUrl}" alt="">
                     <div class="product_item_desc">
                         <h2>${item.title}</h2>
-                        <p>Generic M10 TWS True Wireless Bluetooth Earbuds Earphone with LED Digital</p>
+                        <p>${item.des}</p>
                         <span>${item.color}</span>
                     </div>
                     <div class="product_item_action">
@@ -81,8 +88,9 @@ function check(){
         window.location="login.html"
     }
 }
-
+let  cartsproductDiv = document.querySelector(".carts_products div")
 function addToCart(id){
-    console.log(id)
+     let choosenItem = products.find((item) => item.id===id );
+     cartsproductDiv.innerHTML += `<p>${choosenItem.title}</p>`
 }
 
