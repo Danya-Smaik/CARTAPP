@@ -1,88 +1,33 @@
-// ---------- Header: show user info if logged in ----------
-let userInfo = document.querySelector("#user_info")
-let userD = document.querySelector("#user")
-let links = document.querySelector("#link")
+// ---------- Product rendering ----------
+let allProducts = document.querySelector(".products")
 
-if (localStorage.getItem("username")) {
-    links.remove()
-    userInfo.style.display = "flex"
-    userD.textContent = localStorage.getItem("username")
+// ---------- Favorites ----------
+let favoritesList = document.querySelector(".favorites_list")
+let favorites = JSON.parse(localStorage.getItem("Favorites")) || []
+
+function isFavorite(id) {
+    return favorites.includes(id)
 }
 
-// ---------- Product data ----------
-let allProducts = document.querySelector(".products")
-let products = [
-    {
-        id: 1,
-        title: "airpods",
-        color: "pink",
-        imageUrl: "images/airpods.jpg",
-        des: "Generic M10 TWS True Wireless Bluetooth Earbuds Earphone with LED Digital",
-        price: 40 ,
-        category:"airpods"
-    },
-    {
-        id: 2,
-        title: "Smart Watch",
-        color: "black",
-        imageUrl: "images/smartwatch.jpg",
-        des: "Modern smartwatch with fitness tracking, heart rate monitor, and stylish design suitable for everyday activities.",
-        price: 80,
-        category:"watch"
-    },
-    {
-        id: 3,
-        title: "Head Phone",
-        color: "white",
-        imageUrl: "images/headphonewhite.jpg",
-        des: "Comfortable over-ear headphones delivering deep bass and immersive sound experience for music lovers",
-        price: 60,
-        category:"Head phone"
-    },
-    {
-        id: 4,
-        title: "Head Phone",
-        color: "black",
-        imageUrl: "images/headphone.jpg",
-        des: "Premium wireless headset with crystal clear sound, soft ear cushions, and noise isolation for an immersive listening experience",
-        price: 120,
-        category:"Head phone"
-    },
-    {
-        id: 5,
-        title: "printer",
-        color: "black",
-        imageUrl: "images/printer.jpg",
-        des: "Wireless all-in-one printer with print, scan, copy, and fax functions. Includes automatic duplex printing and is perfect for home office use..",
-        price:  70,
-        category:"printer"
-    },
-    {
-        id: 6,
-        title: "Smart Fitness Watch",
-        color: "black",
-        imageUrl: "images/smartwatch2.jpg",
-        des: "Smart fitness watch with Bluetooth calls, health tracking, 110 sports modes, and IP68 water resistance. Compatible with Android and iPhone",
-        price: 120 ,
-        category:"watch"
-    },
-    {
-        id: 7,
-        title: "Airpods Sports Ear Hooks",
-        color: "white",
-        imageUrl: "images/airpods2.jpg",
-        des: "Comfortable anti-slip silicone ear hooks for AirPods, offering a secure fit during sports and everyday use",
-        price: 20 ,
-        category:"airpods"
-    },
-]
+function toggleFavorite(id) {
+    if (isFavorite(id)) {
+        favorites = favorites.filter((favId) => favId !== id)
+    } else {
+        favorites = [...favorites, id]
+    }
+    localStorage.setItem("Favorites", JSON.stringify(favorites))
+    runSearch()
+    drawFavorites()
+}
 
-function drawItem(list = products) {
-    if (list.length === 0) {
-        allProducts.innerHTML = `<p>No products match your search.</p>`
+function drawFavorites() {
+    if (!favoritesList) return
+    let favoriteProducts = products.filter((item) => isFavorite(item.id))
+    if (favoriteProducts.length === 0) {
+        favoritesList.innerHTML = `<p>You haven't added any favorites yet.</p>`
         return
     }
-    let y = list.map((item) => {
+    let y = favoriteProducts.map((item) => {
         return `
          <div class="product_item">
                     <img src="${item.imageUrl}" alt="">
@@ -94,7 +39,33 @@ function drawItem(list = products) {
                     </div>
                     <div class="product_item_action">
                         <button class="add_to_cart" onClick="addToCart(${item.id})">Add to Cart</button>
-                        <i class="far fa-heart fav"></i>
+                        <i class="fas fa-heart fav active" onClick="toggleFavorite(${item.id})"></i>
+                    </div>
+                </div>
+                `
+    })
+    favoritesList.innerHTML = y.join("")
+}
+
+function drawItem(list = products) {
+    if (list.length === 0) {
+        allProducts.innerHTML = `<p>No products match your search.</p>`
+        return
+    }
+    let y = list.map((item) => {
+        let heartClass = isFavorite(item.id) ? "fas fa-heart fav active" : "far fa-heart fav"
+        return `
+         <div class="product_item">
+                    <img src="${item.imageUrl}" alt="">
+                    <div class="product_item_desc">
+                        <h2>${item.title}</h2>
+                        <p>${item.des}</p>
+                        <span>${item.color} · ${item.category}</span>
+                        <p class="price">$${item.price}</p>
+                    </div>
+                    <div class="product_item_action">
+                        <button class="add_to_cart" onClick="addToCart(${item.id})">Add to Cart</button>
+                        <i class="${heartClass}" onClick="toggleFavorite(${item.id})"></i>
                     </div>
                 </div>
                 `
@@ -102,19 +73,33 @@ function drawItem(list = products) {
     allProducts.innerHTML = y.join("")
 }
 drawItem()
+drawFavorites()
 
-// ---------- Search by product name ----------
+// ---------- Search by name + filter by category ----------
 let searchInput = document.querySelector("#search_input")
 let searchBtn = document.querySelector("#search_btn")
+let categoryFilter = document.querySelector("#category_filter")
+
+// Build the category dropdown options from the products list (no manual duplication)
+let categories = [...new Set(products.map((item) => item.category))]
+categoryFilter.innerHTML += categories.map((cat) => `<option value="${cat}">${cat}</option>`).join("")
 
 function runSearch() {
     let keyword = searchInput.value.trim().toLowerCase()
-    let filtered = products.filter((item) => item.title.toLowerCase().includes(keyword))
+    let selectedCategory = categoryFilter.value
+
+    let filtered = products.filter((item) => {
+        let matchesName = item.title.toLowerCase().includes(keyword)
+        let matchesCategory = selectedCategory === "all" || item.category === selectedCategory
+        return matchesName && matchesCategory
+    })
     drawItem(filtered)
 }
 
-searchInput.addEventListener("keyup", runSearch)
 searchBtn.addEventListener("click", runSearch)
+searchInput.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") runSearch()
+})
 
 // ---------- Cart dropdown + badge ----------
 let cartsproductDiv = document.querySelector(".carts_products div")
@@ -169,7 +154,7 @@ function decreaseQty(id) {
 
 function addToCart(id) {
     // Require login before adding to cart
-    if (!localStorage.getItem("username")) {
+    if (!sessionStorage.getItem("loggedInUser")) {
         window.location = "login.html"
         return
     }

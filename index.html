@@ -4,17 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    <title>cart shoping</title>
+    <title>ElectroHub</title>
 </head>
 <body>
-    <header>
+        <header>
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="brand">Shopping cart</a>
+                <a href="index.html" class="brand">
+                    <img src="images/logo.png" alt="ElectroHub" class="brand-logo">
+                </a>
                 <nav>
                  <ul id="link">
-                    <li><a href="login.html">Sign In</a></li>
+                    <li><a href="login.html">Login</a></li>
                     <li><a href="register.html">Sign Up</a></li>
                  </ul>
                  <ul id="user_info">
@@ -24,10 +29,10 @@
                         <span class="badge"></span>
                         <div class="carts_products">
                             <div></div>
-                            <a href="cartproducts.html">view all product</a>
+                            <a href="cartproducts.html">View All Products</a>
                         </div>
                     </li>
-                    <li><a href="login.html" id="logout">Log Out </a></li>
+                    <li><a href="login.html" id="logout">Log Out</a></li>
                  </ul>
                 </nav>
             </div>
@@ -37,97 +42,21 @@
         <div class="container">
             <div class="search_bar">
                 <input type="text" id="search_input" placeholder="Search by product name...">
+                <select id="category_filter">
+                    <option value="all">All Categories</option>
+                </select>
                 <button id="search_btn">Search</button>
             </div>
             <div class="products">
-
-                <!-- <div class="product_item">
-                    <img src="images/airpods.jpg" alt="">
-                    <div class="product_item_desc">
-                        <h2>airpods</h2>
-                        <p>Generic M10 TWS True Wireless Bluetooth Earbuds Earphone with LED Digital</p>
-                        <span>color : pink</span>
-                    </div>
-                    <div class="product_item_action">
-                        <button class="add_to_cart">Add to Cart</button>
-                        <i class="far fa-heart fav"></i>
-                    </div>
-                </div>
-                 <div class="product_item">
-                    <img src="images/smartwatch.jpg" alt="">
-                    <div class="product_item_desc">
-                        <h2>Smart Watch </h2>
-                        <p>Modern smartwatch with fitness tracking, heart rate monitor, and stylish design suitable for everyday activities.</p>                        <span>color : black </span>
-                    </div>
-                    <div class="product_item_action">
-                        <button class="add_to_cart">Add to Cart</button>
-                        <i class="far fa-heart fav"></i>
-                    </div>
-                </div>
-                 <div class="product_item">
-                    <img src="images/headphonewhite.jpg" alt="">
-                    <div class="product_item_desc">
-                        <h2>Head Phone</h2>
-                        <p>Comfortable over-ear headphones delivering deep bass and immersive sound experience for music lovers.</p>                        <span>color : pink</span>
-                    </div>
-                    <div class="product_item_action">
-                        <button class="add_to_cart">Add to Cart</button>
-                        <i class="far fa-heart fav"></i>
-                    </div>
-                </div>
-                 <div class="product_item">
-                    <img src="images/headphone.jpg" alt="">
-                    <div class="product_item_desc">
-                        <h2>Head Phone</h2>
-                        <p>Premium wireless headset with crystal clear sound, soft ear cushions, and noise isolation for an immersive listening experience.</p>                        <span>color : black</span>
-                    </div>
-                    <div class="product_item_action">
-                        <button class="add_to_cart">Add to Cart</button>
-                        <i class="far fa-heart fav"></i>
-                    </div>
-                </div>
-                <div class="product_item">
-                    <img src="images/printer.jpg" alt="">
-                    <div class="product_item_desc">
-                        <h2>printer</h2>
-                        <p>Wireless all-in-one printer with print, scan, copy, and fax functions. Includes automatic duplex printing and is perfect for home office use..</p>                        <span>color : pink</span>
-                    </div>
-                    <div class="product_item_action">
-                        <button class="add_to_cart">Add to Cart</button>
-                        <i class="far fa-heart fav"></i>
-                    </div>
-                </div>
-                <div class="product_item">
-                    <img src="images/smartwatch2.jpg" alt="">
-                    <div class="product_item_desc">
-                        <h2>Smart Fitness Watch</h2>
-                        <p>Smart fitness watch with Bluetooth calls, health tracking, 110 sports modes, and IP68 water resistance. Compatible with Android and iPhone.</p>                        <span>color : pink</span>
-                    </div>
-                    <div class="product_item_action">
-                        <button class="add_to_cart">Add to Cart</button>
-                        <i class="far fa-heart fav"></i>
-                    </div>
-                </div>
-                <div class="product_item">
-                    <img src="images/airpods2.jpg" alt="">
-                    <div class="product_item_desc">
-                        <h2>Airpods Sports Ear Hooks</h2>
-                        <p>Comfortable anti-slip silicone ear hooks for AirPods, offering a secure fit during sports and everyday use.</p>                        <span>color : white</span>
-                    </div>
-                    <div class="product_item_action">
-                        <button class="add_to_cart">Add to Cart</button>
-                        <i class="far fa-heart fav"></i>
-                    </div>
-                </div> -->
-
             </div>
         </div>
     </section>
 
-    
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/common.js"></script>
+<script src="js/products-data.js"></script>
 <script src="js/script.js"></script>
 
 </body>

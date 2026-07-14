@@ -1,26 +1,24 @@
-let username = document.querySelector("#username")
+let email = document.querySelector("#email")
 let password = document.querySelector("#password")
 
 let loginBtn = document.querySelector("#sign_in")
 
-let getUser = localStorage.getItem("username")
+let getEmail = localStorage.getItem("email")
 let getPassword = localStorage.getItem("password")
 
-loginBtn.addEventListener ("click" , function(e){
+loginBtn.addEventListener("click", function (e) {
     e.preventDefault()
-    if (username.value==="" || password.value===""){
-        alert("please fill data ")
+    if (email.value === "" || password.value === "") {
+        alert("please fill data")
     } else {
-        if ( (getUser && getUser.trim() === username.value.trim() && getPassword && getPassword === password.value )  )
-        {
-            setTimeout ( () => {
+        if (getEmail && getEmail.trim().toLowerCase() === email.value.trim().toLowerCase() && getPassword && getPassword === password.value) {
+            // Login succeeded: start a session (separate from the permanent account data)
+            sessionStorage.setItem("loggedInUser", localStorage.getItem("username"))
+            setTimeout(() => {
                 window.location = "index.html"
-            } , 1500)
+            }, 1500)
         } else {
-            alert("username or password is wrong")
+            alert("email or password is wrong")
         }
     }
 })
-
-
-

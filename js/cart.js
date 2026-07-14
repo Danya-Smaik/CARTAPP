@@ -1,14 +1,3 @@
-// ---------- Header: show user info if logged in ----------
-let userInfo = document.querySelector("#user_info")
-let userD = document.querySelector("#user")
-let links = document.querySelector("#link")
-
-if (localStorage.getItem("username")) {
-    links.remove()
-    userInfo.style.display = "flex"
-    userD.textContent = localStorage.getItem("username")
-}
-
 // ---------- Draw cart page products ----------
 let allProducts = document.querySelector(".products")
 let productsInCart = JSON.parse(localStorage.getItem("ProductsInCart")) || []
@@ -25,11 +14,10 @@ function drawCartProducts(products) {
     }
     let y = products.map((item) => {
         return `
-         <div class="product_item">
+         <div class="product_item product_row">
                     <img src="${item.imageUrl}" alt="">
                     <div class="product_item_desc">
                         <h2>${item.title}</h2>
-                        <p>${item.des}</p>
                         <span>${item.color} · ${item.category}</span>
                         <p class="price">$${item.price} x ${item.quantity} = $${item.price * item.quantity}</p>
                     </div>
@@ -39,7 +27,7 @@ function drawCartProducts(products) {
                             <span class="qty_value">${item.quantity}</span>
                             <button class="qty_btn" onClick="increaseQty(${item.id})">+</button>
                         </div>
-                        <button class="add_to_cart" onClick="RemoveFromCart(${item.id})">Remove From Cart</button>
+                        <button class="remove_btn" onClick="RemoveFromCart(${item.id})">Remove From Cart</button>
                         <i class="far fa-heart fav"></i>
                     </div>
                 </div>
@@ -82,6 +70,62 @@ function decreaseQty(id) {
 function RemoveFromCart(id) {
     let items = getCart().filter((p) => p.id !== id)
     saveCart(items)
+}
+
+// ---------- Favorites ----------
+let favoritesList = document.querySelector(".favorites_list")
+let favorites = JSON.parse(localStorage.getItem("Favorites")) || []
+
+function isFavorite(id) {
+    return favorites.includes(id)
+}
+
+function toggleFavorite(id) {
+    if (isFavorite(id)) {
+        favorites = favorites.filter((favId) => favId !== id)
+    } else {
+        favorites = [...favorites, id]
+    }
+    localStorage.setItem("Favorites", JSON.stringify(favorites))
+    drawFavorites()
+}
+
+function drawFavorites() {
+    let favoriteProducts = products.filter((item) => isFavorite(item.id))
+    if (favoriteProducts.length === 0) {
+        favoritesList.innerHTML = `<p>You haven't added any favorites yet.</p>`
+        return
+    }
+    let y = favoriteProducts.map((item) => {
+        return `
+         <div class="product_item product_row">
+                    <img src="${item.imageUrl}" alt="">
+                    <div class="product_item_desc">
+                        <h2>${item.title}</h2>
+                        <span>${item.color} · ${item.category}</span>
+                        <p class="price">$${item.price}</p>
+                    </div>
+                    <div class="product_item_action">
+                        <i class="fas fa-heart fav active" onClick="toggleFavorite(${item.id})"></i>
+                    </div>
+                </div>
+                `
+    })
+    favoritesList.innerHTML = y.join("")
+}
+drawFavorites()
+
+// ---------- Reveal the favorites section only when scrolled into view ----------
+let favoritesSection = document.querySelector(".favorites_section")
+if (favoritesSection) {
+    let revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("in-view")
+            }
+        })
+    }, { threshold: 0.15 })
+    revealObserver.observe(favoritesSection)
 }
 
 // ---------- Header cart badge + dropdown (same behavior as script.js) ----------

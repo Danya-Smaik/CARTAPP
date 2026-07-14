@@ -4,37 +4,60 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Page</title>
+    <title>ElectroHub · Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <header>
+        <header>
         <div class="container">
             <div class="header-content">
-                <a href="index.html" class="brand">Shopping cart</a>
+                <a href="index.html" class="brand">
+                    <img src="images/logo.png" alt="ElectroHub" class="brand-logo">
+                </a>
                 <nav>
                  <ul id="link">
-                    <li><a href="login.html">Sign In</a></li>
+                    <li><a href="login.html">Login</a></li>
                     <li><a href="register.html">Sign Up</a></li>
+                 </ul>
+                 <ul id="user_info">
+                   <li><a href="#" id="user"></a></li>
+                    <li class="shopping-cart">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span class="badge"></span>
+                        <div class="carts_products">
+                            <div></div>
+                            <a href="cartproducts.html">View All Products</a>
+                        </div>
+                    </li>
+                    <li><a href="login.html" id="logout">Log Out</a></li>
                  </ul>
                 </nav>
             </div>
         </div>
     </header>
     <section class="section-form">
-        <h2>
-            Register User
-        </h2>
+        <h2>Register</h2>
         <form>
+            <label for="username">Username</label>
             <input type="text" placeholder="Enter username" id="username">
+
+            <label for="email">Email</label>
+            <input type="email" placeholder="Enter email" id="email">
+
+            <label for="password">Password</label>
             <input type="password" placeholder="Enter password" id="password">
-            <input type="email" placeholder="Enter Email" id="email">
-            <input type="submit" value="Sign In" id="sign_up">
-            Have An Account <a href="login.html">login</a>
+
+            <input type="submit" value="Register" id="sign_up">
+            <p class="form_footer">Already have an account? <a href="login.html">Login</a></p>
         </form>
     </section>
+    <script src="js/common.js"></script>
     <script src="js/register.js"></script>
     
 </body>
